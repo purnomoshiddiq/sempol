@@ -39,12 +39,12 @@
                             <tbody>
                               @foreach ($buku as $b)
                               <tr>
-                                <td><input type="checkbox" name="check" id="check" value="{{ $b->id }}"></td>
+                                <td><input type="checkbox" name="checkbox" id="checkbox" value="{{ $b->id }}"></td>
                                   <td>
                                       <a href="/data-buku/{{ $b->id }}/edit" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                      <a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                      <a href="/data-buku/{{ $b->id }}/delete" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                   </td>
-                                  <td><img src="{{ 'cover/' . $b->gbr_sampul }}" width="50px" height="50px">
+                                  <td><img class="rounded" src="{{ 'cover/' . $b->gbr_sampul }}" width="50px" height="65px">
                                     
                                   </td>
                                   <td>{{ $b->isbn }}</td>
@@ -143,11 +143,13 @@
     // $(document).ready(function () {
     //     $('#example').DataTable();
     // });
-    $('#example').DataTable();
+    $('#example').DataTable(
+      
+    );
     $('#checkbox').click(function() {
       var checkbox = $('#checkbox').val();
     });
-    alert(checkbox);
+    // alert(checkbox);
     // $('#frmtmbhbuku').submit(function() {
     //             var judul = $("#judul").val();
     //             var pengarang = $("#pengarang").val();

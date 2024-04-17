@@ -26,11 +26,10 @@
                         <h3 class="card-title">Data Master Anggota</h3>
                     </div>
                     <div class="card-body">
-                        <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file-excel"> Import Excel</i></a>
-                        <table id="example" class="table table-striped table-bordered" style="width: 100%">
+                        <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file-excel"> Import</i></a>
+                        <table id="anggota" class="table table-striped table-bordered" style="width: 100%">
                             <thead>
                             <tr>
-                              <th>Hapus</th>
                               <th>Aksi</th>
                               <th>Nama</th>
                               <th>NISN</th>
@@ -39,7 +38,18 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                              @foreach ($anggota as $a)
+                                  <tr>
+                                    <td>
+                                      <a href="/data-anggota/{{ $a->id }}/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                      <a href="/data-anggota/{{ $a->id }}/delete" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                    <td>{{ $a->nama }}</td>
+                                    <td>{{ $a->nisn }}</td>
+                                    <td>{{ $a->no_telp }}</td>
+                                    <td>{{ $a->alamat }}</td>
+                                  </tr>
+                              @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -59,15 +69,15 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="/data-buku/store" id="frmtmbhbuku" method="POST" enctype="multipart/form-data">
+            <form action="/data-anggota/import" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                   <div class="col">
                     <label for="file">Upload Anggota</label>
-                    <input type="file" class="form-control" id="judul" name="judul" accept=".xlsx" required autocomplete="off">
+                    <input type="file" class="form-control" name="file" accept=".xlsx" required autocomplete="off">
                     <span class="text text-danger">
                         <ul style="disc" class="mt-2">
-                            <li><i><a href="{{ asset('template-anggota.xlxs') }}">Download template import excel</a></i></li>
+                            <li><i><a href="{{ asset('template-anggota.xlsx') }}">Download template import excel</a></i></li>
                         </ul>
                     </span>
                   </div>
@@ -83,3 +93,9 @@
   </div>
 
 @endsection
+
+@push('myscript')
+    <script>
+      $('#anggota').DataTable();
+    </script>
+@endpush

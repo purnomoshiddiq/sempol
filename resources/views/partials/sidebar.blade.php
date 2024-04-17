@@ -47,7 +47,23 @@
             </p>
           </a>
       </li>
-        <li class="nav-header">PENGAJUAN</li>
+        <li class="nav-header">SIRKULASI</li>
+        <li class="nav-item">
+          <a href="/data-peminjaman" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+             Data Peminjaman
+            </p>
+          </a>
+      </li>
+      <li class="nav-item {{ Request::is('data-buku') ? 'active' : '' }}">
+        <a href="/data-anggota" class="nav-link">
+          <i class="nav-icon fas fa-user"></i>
+          <p>
+           Data Pengembalian
+          </p>
+        </a>
+    </li>
       </li>
     </ul>
 </nav>

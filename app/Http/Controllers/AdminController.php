@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Anggota;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -57,8 +58,23 @@ class AdminController extends Controller
 
     public function anggota()
     {
-        return view('admin.data-anggota');
+        $anggota = Anggota::all();
+        return view('admin.data-anggota', compact('anggota'));
     }
 
+    public function delete($id)
+    {
+        $delete = Anggota::find($id)->delete();
+        if($delete)
+        {
+            Alert::success('Sukses', 'Annggota berhasil dihapus.');
+            return redirect('/data-anggota');   
+        }
+    }
+
+    public function pinjaman()
+    {
+        return view('admin.data-pinjaman');
+    }
 
 }
